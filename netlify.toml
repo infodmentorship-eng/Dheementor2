@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# React Router client-side routing: serve index.html for any path so deep
+# links and page refreshes (e.g. /contact, /services/visa-assistance) work
+# instead of 404ing.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
