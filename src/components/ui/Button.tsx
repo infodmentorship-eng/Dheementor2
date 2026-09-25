@@ -44,12 +44,24 @@ export function Button({ variant = "primary", className = "", children, ...props
   function handleMouseMove(e: MouseEvent<HTMLButtonElement>) {
     if (!isMagnetic || !buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
+
+    // spotlight: cursor position relative to the button's current rendered
+    // box (background gradients paint in the element's own local box, which
+    // moves with it, so the live rect is the right frame here).
     const relX = e.clientX - rect.left;
     const relY = e.clientY - rect.top;
-    pullX.set((relX - rect.width / 2) * 0.4);
-    pullY.set((relY - rect.height / 2) * 0.7);
     glowX.set(relX);
     glowY.set(relY);
+
+    // magnetic pull: measured from the button's RESTING center (its current
+    // rect minus the offset the pull itself already applied). Using the live
+    // rect directly here would feed back on itself — the pull moves the box,
+    // the next mousemove reads an already-shifted rect, and the two chase
+    // each other into a visible shake, especially at higher pull strength.
+    const restCenterX = rect.left - springPullX.get() + rect.width / 2;
+    const restCenterY = rect.top - springPullY.get() + rect.height / 2;
+    pullX.set((e.clientX - restCenterX) * 0.4);
+    pullY.set((e.clientY - restCenterY) * 0.7);
   }
 
   function handleMouseLeave() {
