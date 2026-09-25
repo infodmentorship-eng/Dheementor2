@@ -27,6 +27,14 @@ export function Button({ variant = "primary", className = "", children, ...props
 
   const isMagnetic = variant === "cta";
   const buttonRef = useRef<HTMLButtonElement>(null);
+  // the button's resting (untransformed) box, measured once per hover instead
+  // of on every mousemove — repeated getBoundingClientRect() calls force a
+  // synchronous layout read on every pixel of mouse movement, which combined
+  // with this button's large blurred box-shadow needing to repaint was
+  // dropping frames and reading as a "shake" rather than a smooth glide.
+  const restRect = useRef<{ left: number; top: number; width: number; height: number } | null>(
+    null
+  );
 
   // pulls the whole button a few px toward the cursor, spring-eased so it
   // glides rather than snaps, and returns to rest on mouse leave.
@@ -41,25 +49,35 @@ export function Button({ variant = "primary", className = "", children, ...props
   const glowY = useMotionValue(0);
   const glowBackground = useMotionTemplate`radial-gradient(300px circle at ${glowX}px ${glowY}px, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.18) 35%, transparent 70%)`;
 
-  function handleMouseMove(e: MouseEvent<HTMLButtonElement>) {
+  function handleMouseEnter() {
     if (!isMagnetic || !buttonRef.current) return;
+    // measure once, at the start of the hover, while the button is still at
+    // (or very near) rest — this is the one and only layout read per hover.
     const rect = buttonRef.current.getBoundingClientRect();
+    restRect.current = {
+      left: rect.left - springPullX.get(),
+      top: rect.top - springPullY.get(),
+      width: rect.width,
+      height: rect.height,
+    };
+  }
 
-    // spotlight: cursor position relative to the button's current rendered
-    // box (background gradients paint in the element's own local box, which
-    // moves with it, so the live rect is the right frame here).
-    const relX = e.clientX - rect.left;
-    const relY = e.clientY - rect.top;
-    glowX.set(relX);
-    glowY.set(relY);
+  function handleMouseMove(e: MouseEvent<HTMLButtonElement>) {
+    if (!isMagnetic || !restRect.current) return;
+    const { left, top, width, height } = restRect.current;
 
-    // magnetic pull: measured from the button's RESTING center (its current
-    // rect minus the offset the pull itself already applied). Using the live
-    // rect directly here would feed back on itself — the pull moves the box,
-    // the next mousemove reads an already-shifted rect, and the two chase
-    // each other into a visible shake, especially at higher pull strength.
-    const restCenterX = rect.left - springPullX.get() + rect.width / 2;
-    const restCenterY = rect.top - springPullY.get() + rect.height / 2;
+    // derive the button's current on-screen box from the cached resting box
+    // plus its current offset — no DOM read needed, so this stays cheap even
+    // at high mousemove frequency.
+    const liveLeft = left + springPullX.get();
+    const liveTop = top + springPullY.get();
+    glowX.set(e.clientX - liveLeft);
+    glowY.set(e.clientY - liveTop);
+
+    // magnetic pull: measured from the RESTING center, so the pull never
+    // feeds back on its own transform.
+    const restCenterX = left + width / 2;
+    const restCenterY = top + height / 2;
     pullX.set((e.clientX - restCenterX) * 0.4);
     pullY.set((e.clientY - restCenterY) * 0.7);
   }
@@ -67,18 +85,20 @@ export function Button({ variant = "primary", className = "", children, ...props
   function handleMouseLeave() {
     pullX.set(0);
     pullY.set(0);
+    restRect.current = null;
   }
 
   return (
     <motion.button
       ref={buttonRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={isMagnetic ? undefined : { y: -2 }}
       whileTap={{ y: 0 }}
       style={isMagnetic ? { x: springPullX, y: springPullY } : undefined}
       transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      className={`${base} ${styles} ${className}`}
+      className={`${base} ${isMagnetic ? "will-change-transform" : ""} ${styles} ${className}`}
       {...props}
     >
       {isMagnetic && (
