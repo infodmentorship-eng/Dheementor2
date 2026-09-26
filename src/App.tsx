@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import { PageLoader } from "./components/PageLoader";
 import { ApostilleAttestation } from "./pages/ApostilleAttestation";
 import { Contact } from "./pages/Contact";
 import { DocumentTranslation } from "./pages/DocumentTranslation";
@@ -31,24 +32,26 @@ function ScrollToHash() {
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-bg text-text">
-      <div className="noise-overlay" />
-      <Navbar />
-      <ScrollToHash />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/study-abroad" element={<StudyAbroad />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/visa-assistance" element={<VisaAssistance />} />
-          <Route path="/services/apostille-attestation" element={<ApostilleAttestation />} />
-          <Route path="/services/document-translation" element={<DocumentTranslation />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <PageLoader>
+      <div className="relative min-h-screen bg-bg text-text">
+        <div className="noise-overlay" />
+        <Navbar />
+        <ScrollToHash />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/study-abroad" element={<StudyAbroad />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/visa-assistance" element={<VisaAssistance />} />
+            <Route path="/services/apostille-attestation" element={<ApostilleAttestation />} />
+            <Route path="/services/document-translation" element={<DocumentTranslation />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </PageLoader>
   );
 }
 

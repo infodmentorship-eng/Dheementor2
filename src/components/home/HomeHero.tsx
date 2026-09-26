@@ -9,11 +9,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
   show: {
     opacity: 1,
     y: 0,
