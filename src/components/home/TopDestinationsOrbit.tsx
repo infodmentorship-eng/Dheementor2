@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
 import { animate, useReducedMotion, type AnimationPlaybackControls } from "framer-motion";
 import { Globe } from "lucide-react";
 import { home } from "../../lib/content";
@@ -104,19 +104,24 @@ export function TopDestinationsOrbit() {
     allControls.current.push(...controls);
   }
 
-  function pauseAll() {
+  // only a real mouse hover should pause the spin — on touch devices a tap
+  // fires a pointerenter with no matching "leave" until the user happens to
+  // touch elsewhere, so the animation looked permanently stuck after a tap.
+  function handlePointerEnter(e: ReactPointerEvent) {
+    if (e.pointerType !== "mouse") return;
     allControls.current.forEach((c) => c.pause());
   }
 
-  function playAll() {
+  function handlePointerLeave(e: ReactPointerEvent) {
+    if (e.pointerType !== "mouse") return;
     allControls.current.forEach((c) => c.play());
   }
 
   return (
     <div
       className="relative mx-auto aspect-square w-full max-w-[520px]"
-      onMouseEnter={reducedMotion ? undefined : pauseAll}
-      onMouseLeave={reducedMotion ? undefined : playAll}
+      onPointerEnter={reducedMotion ? undefined : handlePointerEnter}
+      onPointerLeave={reducedMotion ? undefined : handlePointerLeave}
     >
       <div className="absolute left-1/2 top-1/2 flex h-[clamp(130px,20vw,190px)] w-[clamp(130px,20vw,190px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-full border border-border bg-surface-2 text-center">
         <Globe size={28} className="text-orange" />
