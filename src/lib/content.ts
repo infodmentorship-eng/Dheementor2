@@ -103,6 +103,19 @@ export const home = {
     ctaSecondary: "Explore Our Services",
   },
 
+  topDestinationsOrbit: {
+    centerLabel: "Top Destinations",
+    // ISO 3166-1 alpha-2 codes (flagcdn.com), placed clockwise starting at the top
+    countries: [
+      { name: "UK", code: "gb" },
+      { name: "USA", code: "us" },
+      { name: "Canada", code: "ca" },
+      { name: "Europe", code: "eu" },
+      { name: "Russia", code: "ru" },
+      { name: "Australia", code: "au" },
+    ],
+  },
+
   travelMoment: {
     lineOne: "Simplifying travel, one visa at a time.",
     lineTwo: "We make your visa process effortless.",
