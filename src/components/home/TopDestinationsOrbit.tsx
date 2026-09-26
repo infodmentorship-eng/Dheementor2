@@ -4,7 +4,7 @@ import { Globe } from "lucide-react";
 import { home } from "../../lib/content";
 
 const RADIUS = 220; // px, from ring center to each flag's center
-const FLAG_SIZE = 110; // px
+const FLAG_SIZE = 80; // px
 
 const SPIN_DURATION = 30; // seconds per full revolution
 const FAN_OUT_SPRING = { type: "spring" as const, stiffness: 70, damping: 14 };
