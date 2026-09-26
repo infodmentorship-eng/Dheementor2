@@ -105,12 +105,14 @@ export const home = {
 
   topDestinationsOrbit: {
     centerLabel: "Top Destinations",
-    // ISO 3166-1 alpha-2 codes (flagcdn.com), placed clockwise starting at the top
+    // flag filenames from the circle-flags set (cdn.jsdelivr.net/gh/HatScripts/circle-flags),
+    // placed clockwise starting at the top. Europe uses "european_union" — "eu" is a git
+    // symlink in that repo that jsDelivr serves as literal text instead of following.
     countries: [
       { name: "UK", code: "gb" },
       { name: "USA", code: "us" },
       { name: "Canada", code: "ca" },
-      { name: "Europe", code: "eu" },
+      { name: "Europe", code: "european_union" },
       { name: "Russia", code: "ru" },
       { name: "Australia", code: "au" },
     ],

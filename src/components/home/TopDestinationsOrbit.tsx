@@ -74,7 +74,7 @@ function OrbitFlag({
               style={{ width: FLAG_SIZE, height: FLAG_SIZE }}
             >
               <img
-                src={`https://flagcdn.com/w160/${country.code}.png`}
+                src={`https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@2.8.0/flags/${country.code}.svg`}
                 alt={country.name}
                 loading="lazy"
                 className="h-full w-full object-cover"
