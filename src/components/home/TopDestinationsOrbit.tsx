@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { animate, useReducedMotion } from "framer-motion";
-import { Globe } from "lucide-react";
+import rotatingEarth from "../../assets/Rotating_earth_animated_transparent.gif";
 import { home } from "../../lib/content";
 
 const RADIUS = 220; // px, from ring center to each flag's center
@@ -97,7 +97,11 @@ export function TopDestinationsOrbit() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[520px]">
       <div className="absolute left-1/2 top-1/2 flex h-[clamp(130px,20vw,190px)] w-[clamp(130px,20vw,190px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-full border border-border bg-surface-2 text-center">
-        <Globe size={28} className="text-orange" />
+        <img
+          src={rotatingEarth}
+          alt="Rotating Earth"
+          className="h-[clamp(72px,12vw,112px)] w-[clamp(72px,12vw,112px)] object-contain"
+        />
         <span className="px-4 text-sm font-bold leading-tight text-text">
           {topDestinationsOrbit.centerLabel}
         </span>
