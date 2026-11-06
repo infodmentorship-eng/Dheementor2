@@ -10,9 +10,7 @@ export const site = {
   address:
     "DHEE Mentorship, Main Bazaar Road, Ramanathapuram, Tamil Nadu 623501, India",
   workingHours: "Mon – Sat, 9:30 AM – 6:30 PM",
-  // TODO: add the real WhatsApp number, e.g. "https://wa.me/91XXXXXXXXXX" — every
-  // "Chat on WhatsApp" link on the site reads from this one field.
-  whatsapp: "",
+  whatsapp: "https://wa.me/917401750100",
 };
 
 export type NavItem =
