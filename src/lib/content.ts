@@ -127,33 +127,33 @@ export const home = {
     tabs: [
       {
         label: "Study Abroad",
-        title: "Study Abroad Consultancy",
-        description:
-          "End-to-end guidance to choose the right country, course, and university for your goals.",
+        // title: "Study Abroad Consultancy",
+        // description:
+        //   "End-to-end guidance to choose the right country, course, and university for your goals.",
       },
       {
         label: "Visa",
-        title: "Visa Assistance",
-        description:
-          "Complete visa support from documentation to interview preparation and tracking.",
+        // title: "Visa Assistance",
+        // description:
+        //   "Complete visa support from documentation to interview preparation and tracking.",
       },
       {
         label: "Apostille",
-        title: "Apostille & Attestation",
-        description:
-          "Fast, reliable attestation for personal, educational, legal, and commercial documents.",
+        // title: "Apostille & Attestation",
+        // description:
+        //   "Fast, reliable attestation for personal, educational, legal, and commercial documents.",
       },
       {
         label: "Translation",
-        title: "Document Translation",
-        description:
-          "Certified, globally accepted translations for legal, medical, academic, and business documents.",
+        // title: "Document Translation",
+        // description:
+        //   "Certified, globally accepted translations for legal, medical, academic, and business documents.",
       },
       {
         label: "Jobs Abroad",
-        title: "Jobs Abroad",
-        description:
-          "Country-wise job openings we're actively helping candidates apply for, with guidance through the full application process.",
+        // title: "Jobs Abroad",
+        // description:
+        //   "Country-wise job openings we're actively helping candidates apply for, with guidance through the full application process.",
       },
     ],
     whyUs: [
