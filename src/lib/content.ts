@@ -6,7 +6,7 @@
 export const site = {
   name: "Dhee Mentorship",
   tagline: "Your attitude determines your direction",
-  email: "info.dmentorship@gmail.com",
+  email: "info@dheementorship.com",
   address:
     "DHEE Mentorship, Main Bazaar Road, Ramanathapuram, Tamil Nadu 623501, India",
   workingHours: "Mon – Sat, 9:30 AM – 6:30 PM",
@@ -395,19 +395,23 @@ export const visaAssistance = {
       },
       {
         title: "Document Preparation",
-        description: "We help you gather, verify, and organize everything your application needs.",
+        description:
+          "We help you gather, verify, and organize everything your application needs.",
       },
       {
         title: "Application Submission",
-        description: "Your file is filed accurately and on time with the relevant authority.",
+        description:
+          "Your file is filed accurately and on time with the relevant authority.",
       },
       {
         title: "Interview Preparation",
-        description: "Mock interviews and coaching so you walk in ready for anything.",
+        description:
+          "Mock interviews and coaching so you walk in ready for anything.",
       },
       {
         title: "Tracking & Updates",
-        description: "Regular status updates so you always know exactly where things stand.",
+        description:
+          "Regular status updates so you always know exactly where things stand.",
       },
     ],
   },
@@ -417,22 +421,26 @@ export const visaAssistance = {
     items: [
       {
         title: "Translation",
-        description: "Certified translation of supporting documents wherever it's required.",
+        description:
+          "Certified translation of supporting documents wherever it's required.",
       },
       {
         title: "Embassy Coordination",
-        description: "We liaise directly with embassies on legalization of key documents.",
+        description:
+          "We liaise directly with embassies on legalization of key documents.",
       },
       {
         title: "Apostille Support",
-        description: "Apostille of educational and personal documents for your visa file.",
+        description:
+          "Apostille of educational and personal documents for your visa file.",
       },
     ],
   },
 
   finalCta: {
     heading: "Ready to Start Your Visa Application?",
-    subtext: "Book a free consultation and we'll map out your exact visa pathway.",
+    subtext:
+      "Book a free consultation and we'll map out your exact visa pathway.",
     ctaPrimary: "Book Free Consultation",
   },
 };
@@ -461,22 +469,26 @@ export const apostilleAttestation = {
     stats: [
       {
         title: "Fast",
-        description: "A streamlined process with clear timelines and regular status updates.",
+        description:
+          "A streamlined process with clear timelines and regular status updates.",
       },
       {
         title: "Reliable",
-        description: "Verified procedures that meet embassy and government standards.",
+        description:
+          "Verified procedures that meet embassy and government standards.",
       },
       {
         title: "Globally Accepted",
-        description: "Documents accepted across 120+ Hague Convention member countries.",
+        description:
+          "Documents accepted across 120+ Hague Convention member countries.",
       },
     ],
   },
 
   finalCta: {
     heading: "Ready to Get Your Documents Apostilled?",
-    subtext: "Book a free consultation and we'll map out the exact steps for your documents.",
+    subtext:
+      "Book a free consultation and we'll map out the exact steps for your documents.",
     ctaPrimary: "Book Free Consultation",
   },
 };
@@ -501,23 +513,28 @@ export const documentTranslation = {
     categories: [
       {
         title: "Legal & Immigration Documents",
-        description: "Visa applications, court documents, contracts, and affidavits translated with legal precision.",
+        description:
+          "Visa applications, court documents, contracts, and affidavits translated with legal precision.",
       },
       {
         title: "Business & Financial Documents",
-        description: "Agreements, financial statements, and corporate records translated for international business.",
+        description:
+          "Agreements, financial statements, and corporate records translated for international business.",
       },
       {
         title: "Medical Reports",
-        description: "Prescriptions, diagnostic reports, and medical records translated accurately for treatment abroad.",
+        description:
+          "Prescriptions, diagnostic reports, and medical records translated accurately for treatment abroad.",
       },
       {
         title: "Technical Documents",
-        description: "Manuals, specifications, and product documentation translated with subject-matter accuracy.",
+        description:
+          "Manuals, specifications, and product documentation translated with subject-matter accuracy.",
       },
       {
         title: "Academic Records",
-        description: "Degree certificates, mark sheets, and transcripts translated for university admissions.",
+        description:
+          "Degree certificates, mark sheets, and transcripts translated for university admissions.",
       },
     ],
   },
@@ -527,19 +544,39 @@ export const documentTranslation = {
     categories: [
       {
         title: "Personal Documents",
-        items: ["Birth Certificate", "Marriage Certificate", "PCC", "Affidavits"],
+        items: [
+          "Birth Certificate",
+          "Marriage Certificate",
+          "PCC",
+          "Affidavits",
+        ],
       },
       {
         title: "Educational Documents",
-        items: ["Degree Certificate", "Mark Sheets", "Transfer Certificate", "Diplomas"],
+        items: [
+          "Degree Certificate",
+          "Mark Sheets",
+          "Transfer Certificate",
+          "Diplomas",
+        ],
       },
       {
         title: "Legal Documents",
-        items: ["Power of Attorney", "Court Orders", "Notarized Agreements", "Adoption Papers"],
+        items: [
+          "Power of Attorney",
+          "Court Orders",
+          "Notarized Agreements",
+          "Adoption Papers",
+        ],
       },
       {
         title: "Commercial & Corporate Documents",
-        items: ["Certificate of Incorporation", "Invoices", "MOA/AOA", "Board Resolutions"],
+        items: [
+          "Certificate of Incorporation",
+          "Invoices",
+          "MOA/AOA",
+          "Board Resolutions",
+        ],
       },
     ],
   },
@@ -549,15 +586,18 @@ export const documentTranslation = {
     steps: [
       {
         title: "Document Verification",
-        description: "We review your documents for eligibility and completeness before starting the process.",
+        description:
+          "We review your documents for eligibility and completeness before starting the process.",
       },
       {
         title: "Notarization",
-        description: "Your documents are notarized by authorized local notaries as the first layer of verification.",
+        description:
+          "Your documents are notarized by authorized local notaries as the first layer of verification.",
       },
       {
         title: "State / Home Department Authentication",
-        description: "Documents are authenticated at the relevant state or home department.",
+        description:
+          "Documents are authenticated at the relevant state or home department.",
       },
       {
         title: "MEA Apostille / Attestation",
@@ -566,28 +606,36 @@ export const documentTranslation = {
       },
       {
         title: "Delivery",
-        description: "Your apostilled or attested documents are securely delivered to you, ready for global use.",
+        description:
+          "Your apostilled or attested documents are securely delivered to you, ready for global use.",
       },
     ],
   },
 
   whyUs: {
     items: [
-      { title: "Accuracy", description: "Every translation is reviewed for linguistic and contextual accuracy." },
+      {
+        title: "Accuracy",
+        description:
+          "Every translation is reviewed for linguistic and contextual accuracy.",
+      },
       {
         title: "Global Acceptance",
-        description: "Certified translations accepted by embassies, universities, and authorities worldwide.",
+        description:
+          "Certified translations accepted by embassies, universities, and authorities worldwide.",
       },
       {
         title: "Quick Turnaround",
-        description: "Most documents translated and certified within 24–48 hours.",
+        description:
+          "Most documents translated and certified within 24–48 hours.",
       },
     ],
   },
 
   finalCta: {
     heading: "Ready to Get Your Documents Translated?",
-    subtext: "Book a free consultation and we'll guide you through certified translation for your documents.",
+    subtext:
+      "Book a free consultation and we'll guide you through certified translation for your documents.",
     ctaPrimary: "Book Free Consultation",
   },
 };

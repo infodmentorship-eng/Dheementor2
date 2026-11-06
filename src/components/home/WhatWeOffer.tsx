@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, Route, ShieldCheck, Zap } from "lucide-react";
-import apostilleImage from "../../assets/apostille_banner.png";
-import jobsAbroadImage from "../../assets/job_abroad.png";
-import studyAbroadImage from "../../assets/Study _Abroad.png";
-import translationImage from "../../assets/Translation.png";
-import visaImage from "../../assets/visa.png";
 import { home } from "../../lib/content";
 import { EyebrowPill } from "../ui/EyebrowPill";
 import { Reveal } from "../ui/Reveal";
@@ -19,14 +14,6 @@ export function WhatWeOffer() {
   const { offer } = home;
   const [activeTab, setActiveTab] = useState(0);
   const [activeCard, setActiveCard] = useState(0);
-  const selectedTab = offer.tabs[activeTab];
-  const isStudyAbroad = selectedTab.label === "Study Abroad";
-  const isVisa = selectedTab.label === "Visa";
-  const isApostille = selectedTab.label === "Apostille";
-  const isTranslation = selectedTab.label === "Translation";
-  const isJobsAbroad = selectedTab.label === "Jobs Abroad";
-  const hasBannerImage =
-    isStudyAbroad || isVisa || isApostille || isTranslation || isJobsAbroad;
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -63,7 +50,7 @@ export function WhatWeOffer() {
 
       <Reveal delay={0.15} className="mt-8">
         <SelectionFrame className="mx-auto max-w-3xl">
-          <div className={`min-h-[180px] rounded-2xl ${hasBannerImage ? "" : "bg-surface p-10 text-center"}`}>
+          <div className="min-h-[180px] rounded-2xl bg-surface p-10 text-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -72,96 +59,10 @@ export function WhatWeOffer() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3, ease: EASE }}
               >
-                {isStudyAbroad ? (
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={studyAbroadImage}
-                      alt="Study abroad destinations around the world"
-                      className="block h-auto w-full rounded-2xl"
-                    />
-                    <div className="absolute inset-y-0 left-[5%] flex w-[40%] flex-col justify-center text-left">
-                      <h3 className="text-[clamp(0.8rem,2vw,1.75rem)] font-semibold leading-tight text-slate-950/75">
-                        Study Abroad Consultancy
-                      </h3>
-                      <p className="mt-2 max-w-[30ch] text-[clamp(0.58rem,1vw,0.9rem)] leading-snug text-slate-950/75">
-                        End-to-end guidance to choose the right country, course, and university for your goals.
-                      </p>
-                    </div>
-                  </div>
-                ) : isVisa ? (
-                  <img
-                    src={visaImage}
-                    alt="Visa assistance banner with passport documents and a visa consultation"
-                    className="block h-auto w-full rounded-2xl"
-                  />
-                ) : isApostille ? (
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={apostilleImage}
-                      alt="Apostille certificate, gold seal, and certification stamp"
-                      className="block h-auto w-full rounded-2xl"
-                    />
-                    <div className="absolute inset-y-0 left-[5%] flex w-[40%] flex-col justify-center text-left">
-                      <h3 className="text-[clamp(0.85rem,1.8vw,1.5rem)] font-bold leading-tight text-white/85">
-                        Apostille &amp; Attestation
-                      </h3>
-                      <p className="mt-2 max-w-[30ch] text-[clamp(0.62rem,0.95vw,0.9rem)] leading-snug text-white/80">
-                        Fast, reliable attestation for personal, educational, legal, and commercial documents.
-                      </p>
-                    </div>
-                  </div>
-                ) : isTranslation ? (
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={translationImage}
-                      alt="Certified translation documents and language services"
-                      className="block h-auto w-full rounded-2xl"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-slate-950/50 via-slate-950/35 to-transparent"
-                    />
-                    <div className="absolute inset-y-0 left-[5%] flex w-[36%] flex-col justify-center text-left">
-                      <h3 className="text-[clamp(0.85rem,1.8vw,1.5rem)] font-bold leading-tight text-white">
-                        Document Translation
-                      </h3>
-                      <p className="mt-2 max-w-[32ch] text-[clamp(0.62rem,0.95vw,0.9rem)] leading-relaxed text-white">
-                        Certified, globally accepted translations for legal, medical, academic, and business documents.
-                      </p>
-                    </div>
-                  </div>
-                ) : isJobsAbroad ? (
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={jobsAbroadImage}
-                      alt="Jobs abroad opportunities"
-                      className="block h-auto w-full rounded-2xl"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-slate-950/50 via-slate-950/40 to-transparent"
-                    />
-                    <div className="absolute inset-y-0 left-[5%] flex w-[38%] flex-col justify-center text-left">
-                      <h3 className="text-[clamp(0.85rem,1.8vw,1.5rem)] font-bold leading-tight text-white">
-                        Jobs Abroad
-                      </h3>
-                      <p className="mt-2 max-w-[38ch] text-[clamp(0.62rem,0.95vw,0.9rem)] leading-relaxed text-white">
-                        Country-wise job openings we're actively helping candidates apply for, with guidance through the full application process.
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    {"title" in selectedTab && typeof selectedTab.title === "string" && (
-                      <h3 className="text-2xl font-bold text-text">{selectedTab.title}</h3>
-                    )}
-                    {"description" in selectedTab && typeof selectedTab.description === "string" && (
-                      <p className="mx-auto mt-4 max-w-[55ch] text-text-muted">
-                        {selectedTab.description}
-                      </p>
-                    )}
-                  </>
-                )}
+                <h3 className="text-2xl font-bold text-text">{offer.tabs[activeTab].title}</h3>
+                <p className="mx-auto mt-4 max-w-[55ch] text-text-muted">
+                  {offer.tabs[activeTab].description}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
