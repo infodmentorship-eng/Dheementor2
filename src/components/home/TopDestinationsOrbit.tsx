@@ -3,8 +3,8 @@ import { animate, useReducedMotion } from "framer-motion";
 import rotatingEarth from "../../assets/Rotating_earth_animated_transparent.gif";
 import { home } from "../../lib/content";
 
-const RADIUS = 220; // px, from ring center to each flag's center
-const FLAG_SIZE = 80; // px
+const RADIUS = "clamp(100px, 30vw, 220px)"; // from ring center to each flag's center
+const FLAG_SIZE = "clamp(56px, 11vw, 80px)";
 
 const SPIN_DURATION = 30; // seconds per full revolution
 const FAN_OUT_SPRING = { type: "spring" as const, stiffness: 70, damping: 14 };
@@ -66,7 +66,7 @@ function OrbitFlag({
 
   return (
     <div ref={armRef} className="absolute left-1/2 top-1/2 h-0 w-0 origin-top-left">
-      <div className="absolute left-0 top-0" style={{ transform: `translateY(-${RADIUS}px)` }}>
+      <div className="absolute left-0 top-0" style={{ transform: `translateY(calc(-1 * ${RADIUS}))` }}>
         <div className="absolute -translate-x-1/2 -translate-y-1/2">
           <div ref={flagRef} className="flex flex-col items-center gap-2">
             <span
