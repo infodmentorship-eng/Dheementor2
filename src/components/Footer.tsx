@@ -48,7 +48,14 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-3 text-sm text-text-muted">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-orange" />
-                <span>{site.address}</span>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-text"
+                >
+                  {site.address}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="shrink-0 text-orange" />
