@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 import { home } from "../../lib/content";
 import { EyebrowPill } from "../ui/EyebrowPill";
 import { Reveal } from "../ui/Reveal";
+import europeImage from "../../assets/Europe.png";
+import chinaImage from "../../assets/China.png";
+import uaeImage from "../../assets/UAE.png";
+
+// Banner images per destination code; cards without one fall back to the code badge.
+const destinationImages: Record<string, string> = {
+  EU: europeImage,
+  CN: chinaImage,
+  AE: uaeImage,
+};
 
 export function Destinations() {
   const { destinations } = home;
@@ -25,10 +35,21 @@ export function Destinations() {
               className="group flex h-full flex-col rounded-card border border-border bg-surface p-5 transition-all duration-200 hover:-translate-y-1 hover:border-orange/40"
             >
               <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-linear-to-br from-surface-2 to-black">
-                <div className="grid-texture absolute inset-0" />
-                <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-orange/40 bg-orange-soft text-lg font-extrabold tracking-wide text-orange-hover">
-                  {dest.code}
-                </span>
+                {destinationImages[dest.code] ? (
+                  <img
+                    src={destinationImages[dest.code]}
+                    alt={dest.name}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <>
+                    <div className="grid-texture absolute inset-0" />
+                    <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-orange/40 bg-orange-soft text-lg font-extrabold tracking-wide text-orange-hover">
+                      {dest.code}
+                    </span>
+                  </>
+                )}
                 <span className="absolute right-3 top-3 rounded-full bg-orange px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-white shadow-md">
                   {dest.tag}
                 </span>

@@ -1,43 +1,26 @@
-import {
-  Clock,
-  GraduationCap,
-  Globe,
-  Lightbulb,
-  Target,
-  Wallet,
-  Zap,
-} from "lucide-react";
-import type { ComponentType } from "react";
+import { Clock, Globe, Lightbulb, Target, Wallet, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 import { studyAbroad } from "../../lib/content";
 import { EyebrowPill } from "../ui/EyebrowPill";
 import { Reveal } from "../ui/Reveal";
 
 const icons = [Clock, Wallet, Zap, Lightbulb, Target, Globe];
 
-function Tile({
-  title,
-  description,
-  Icon,
-}: {
-  title: string;
-  description: string;
-  Icon: ComponentType<{ size?: number }>;
-}) {
-  return (
-    <div className="flex h-full flex-col rounded-2xl border border-white/5 bg-surface p-8 transition-colors duration-200 hover:border-orange/40">
-      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-orange">
-        <Icon size={20} />
-      </span>
-      <h3 className="mt-5 text-lg font-semibold text-text">{title}</h3>
-      <p className="mt-2 text-sm leading-[1.6] text-text-muted">{description}</p>
-    </div>
-  );
-}
-
 export function WhyChooseGrid() {
   const { whyChoose } = studyAbroad;
-  const [t0, t1, t2, t3, t4, t5] = whyChoose.tiles;
-  const [i0, i1, i2, i3, i4, i5] = icons;
+  const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  // Cycle the highlighted card; pause while the user hovers one.
+  useEffect(() => {
+    if (hovered !== null) return;
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % whyChoose.tiles.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [hovered, whyChoose.tiles.length]);
+
+  const current = hovered ?? active;
 
   return (
     <section className="relative mx-auto max-w-7xl px-6 py-[clamp(80px,12vh,160px)]">
@@ -53,29 +36,35 @@ export function WhyChooseGrid() {
         <p className="mt-4 max-w-[55ch] text-text-muted">{whyChoose.intro}</p>
       </Reveal>
 
-      <Reveal delay={0.1} className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
-        <Tile {...t0} Icon={i0} />
-        <Tile {...t1} Icon={i1} />
-        <Tile {...t2} Icon={i2} />
-
-        <Tile {...t3} Icon={i3} />
-        <div className="relative flex items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-surface p-8">
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 50%, rgba(255,92,22,0.6) 0%, rgba(255,92,22,0.25) 55%, transparent 100%)",
-            }}
-          />
-          <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-bg shadow-[0_0_60px_rgba(255,92,22,0.55)]">
-            <GraduationCap size={30} />
-          </span>
-        </div>
-        <Tile {...t4} Icon={i4} />
-
-        <div className="md:col-start-2">
-          <Tile {...t5} Icon={i5} />
-        </div>
+      <Reveal delay={0.1} className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {whyChoose.tiles.map((tile, i) => {
+          const Icon = icons[i];
+          const isActive = current === i;
+          return (
+            <div
+              key={tile.title}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              className={`relative flex h-full min-h-[200px] flex-col rounded-2xl border p-6 transition-all duration-500 ${
+                isActive
+                  ? "border-orange/60 bg-orange-soft shadow-[0_20px_60px_-20px_rgba(255,92,22,0.55)]"
+                  : "border-white/10 bg-surface"
+              }`}
+            >
+              <span
+                className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-all duration-500 ${
+                  isActive
+                    ? "-translate-y-1 -rotate-6 border-orange bg-orange text-white shadow-lg shadow-orange/40"
+                    : "border-orange/30 bg-orange-soft text-orange"
+                }`}
+              >
+                <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <h3 className="mt-auto pt-8 text-lg font-bold text-text">{tile.title}</h3>
+              <p className="mt-2 text-sm leading-[1.6] text-text-muted">{tile.description}</p>
+            </div>
+          );
+        })}
       </Reveal>
     </section>
   );

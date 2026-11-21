@@ -1,8 +1,17 @@
-import { Languages, Landmark, Stamp } from "lucide-react";
+import { ArrowUpRight, Languages, Landmark, Stamp } from "lucide-react";
+import type { MouseEvent } from "react";
 import { visaAssistance } from "../../lib/content";
 import { Reveal } from "../ui/Reveal";
 
 const icons = [Languages, Landmark, Stamp];
+
+// Track the cursor inside the card so the spotlight glow follows it.
+function trackPointer(e: MouseEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  const rect = el.getBoundingClientRect();
+  el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+  el.style.setProperty("--my", `${e.clientY - rect.top}px`);
+}
 
 export function MoreThanVisaFiling() {
   const { moreThan } = visaAssistance;
@@ -21,12 +30,43 @@ export function MoreThanVisaFiling() {
           const Icon = icons[i];
           return (
             <Reveal key={item.title} delay={i * 0.08}>
-              <div className="flex h-full flex-col rounded-card border border-border bg-surface p-8">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-soft text-orange">
-                  <Icon size={22} />
-                </span>
-                <h3 className="mt-5 text-lg font-bold text-text">{item.title}</h3>
-                <p className="mt-2 text-sm leading-[1.65] text-text-muted">{item.description}</p>
+              <div
+                onMouseMove={trackPointer}
+                className="group relative flex h-full min-h-[270px] flex-col overflow-hidden rounded-card border border-border bg-surface p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-orange/60 hover:shadow-[0_25px_60px_-20px_rgba(255,92,22,0.5)]"
+              >
+                {/* Cursor-following spotlight */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,92,22,0.22), transparent 65%)",
+                  }}
+                />
+
+                {/* Orange bar that sweeps in along the bottom edge */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-orange to-orange/0 transition-transform duration-700 ease-out group-hover:scale-x-100"
+                />
+
+                <div className="relative flex items-start justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-soft text-orange transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-orange group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange/40">
+                    <Icon size={22} />
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    aria-hidden="true"
+                    className="translate-y-2 -translate-x-2 text-orange opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+                  />
+                </div>
+
+                <h3 className="relative mt-auto pt-8 text-lg font-bold text-text transition-transform duration-500 group-hover:translate-x-1">
+                  {item.title}
+                </h3>
+                <p className="relative mt-2 text-sm leading-[1.65] text-text-muted transition-colors duration-500 group-hover:text-text/80">
+                  {item.description}
+                </p>
               </div>
             </Reveal>
           );
